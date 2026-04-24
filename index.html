@@ -183,17 +183,21 @@
         .btn-primary {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 12px 24px;
+            padding: 13px 22px;
             background: var(--ink);
             color: var(--bg-paper);
             border: none;
             border-radius: var(--radius);
             font-family: var(--font);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
+            line-height: 1;
             cursor: pointer;
             transition: all 0.15s ease;
+            white-space: nowrap;
+            letter-spacing: -0.005em;
         }
         .btn-primary:hover {
             background: #000;
@@ -203,28 +207,37 @@
         .btn-secondary {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 12px 24px;
+            padding: 13px 22px;
             background: var(--bg-paper);
             color: var(--ink);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             font-family: var(--font);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
+            line-height: 1;
             cursor: pointer;
             transition: all 0.15s ease;
+            white-space: nowrap;
+            letter-spacing: -0.005em;
         }
         .btn-secondary:hover {
             border-color: var(--ink);
             background: var(--bg-subtle);
         }
-        .btn svg {
+        .btn-primary svg,
+        .btn-secondary svg {
             width: 14px;
             height: 14px;
             stroke: currentColor;
             stroke-width: 2;
             fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+            display: block;
         }
 
         /* Stats strip */
@@ -1010,7 +1023,7 @@
                 The bigger vision is to build a complete suite of free tools that meaningfully reduce the load on educators across India — and someday, to use what's learned here to support new models of affordable, high-quality schooling.
             </p>
             <p>
-                Built from <span class="about-highlight">Pune, India 🇮🇳</span> with a lot of iteration and a little stubbornness.
+                Built from <span class="about-highlight">Delhi, India 🇮🇳</span> with a lot of iteration and a little stubbornness.
             </p>
         </div>
     </section>
@@ -1037,7 +1050,7 @@
                         </div>
                         EduGen Suite
                     </a>
-                    <p>Free AI tools designed for Indian educators. Built with care from Pune.</p>
+                    <p>Free AI tools designed for Indian educators. Built with care from Delhi.</p>
                 </div>
                 <div>
                     <div class="footer-col-title">Tools</div>
@@ -1065,7 +1078,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <div>© 2026 EduGen Suite · Built in Pune, India 🇮🇳</div>
+                <div>© 2026 EduGen Suite · Built in Delhi, India 🇮🇳</div>
                 <div class="footer-social">
                     <a href="https://github.com/Priyanka3025" target="_blank" aria-label="GitHub">
                         <svg viewBox="0 0 16 16" fill="currentColor" stroke="none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
