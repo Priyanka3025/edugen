@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGen Suite — AI tools for Indian educators</title>
+    <meta name="description" content="A growing suite of AI-powered tools designed to help Indian teachers save time and teach better. Free quiz generator, lesson planner, and more.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #FAF9F7;
+            --bg-paper: #FFFFFF;
+            --bg-subtle: #F5F4F1;
+            --ink: #1A1A1A;
+            --ink-soft: #3D3D3D;
+            --ink-muted: #6B6B6B;
+            --ink-light: #9A9A9A;
+            --accent: #D4A574;
+            --accent-hover: #C49560;
+            --accent-soft: #F5EDE0;
+            --border: #E8E6E1;
+            --border-soft: #EFEDE8;
+            --success: #2D8659;
+            --quiz-color: #5B7FFF;
+            --lesson-color: #FF6B6B;
+            --paper-color: #4ECDC4;
+            --worksheet-color: #FFA84D;
+            --doubt-color: #9B5DE5;
+            --notes-color: #2D8659;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --radius: 10px;
+            --radius-lg: 14px;
+            --shadow-sm: 0 1px 3px rgba(26, 26, 26, 0.06), 0 1px 2px rgba(26, 26, 26, 0.04);
+            --shadow-md: 0 4px 12px rgba(26, 26, 26, 0.06), 0 2px 4px rgba(26, 26, 26, 0.04);
+            --shadow-lg: 0 12px 24px rgba(26, 26, 26, 0.08), 0 4px 8px rgba(26, 26, 26, 0.04);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--ink);
+            font-size: 15px;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 249, 247, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: -0.015em;
+        }
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: var(--ink);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-mark svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--bg);
+            stroke-width: 2;
+            fill: none;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            font-size: 14px;
+            color: var(--ink-muted);
+        }
+        .nav-links a {
+            transition: color 0.15s ease;
+        }
+        .nav-links a:hover {
+            color: var(--ink);
+        }
+        .nav-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--ink-muted);
+        }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 96px 32px 80px;
+            text-align: center;
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink-muted);
+            background: var(--bg-paper);
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            margin-bottom: 32px;
+        }
+        .hero-eyebrow-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .hero-title {
+            font-weight: 600;
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: var(--ink);
+            margin-bottom: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-title-accent {
+            color: var(--ink-muted);
+            font-weight: 400;
+        }
+        .hero-subtitle {
+            max-width: 640px;
+            margin: 0 auto 40px;
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--ink-soft);
+        }
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--ink);
+            color: var(--bg-paper);
+            border: none;
+            border-radius: var(--radius);
+            font-family: var(--font);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-primary:hover {
+            background: #000;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--bg-paper);
+            color: var(--ink);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: var(--font);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-secondary:hover {
+            border-color: var(--ink);
+            background: var(--bg-subtle);
+        }
+        .btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Stats strip */
+        .stats {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px 80px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -0.03em;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: var(--ink-muted);
+        }
+
+        /* Section */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 32px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .section-eyebrow {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-hover);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--ink-muted);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Tool cards */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .tool-card {
+            background: var(--bg-paper);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-card:hover {
+            border-color: var(--ink-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .tool-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .tool-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        .tool-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .tool-badge {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 5px 10px;
+            border-radius: 100px;
+        }
+        .tool-badge.live {
+            background: rgba(45, 134, 89, 0.1);
+            color: var(--success);
+        }
+        .tool-badge.soon {
+            background: var(--bg-subtle);
+            color: var(--ink-muted);
+        }
+        .tool-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .tool-tagline {
+            font-size: 14px;
+            color: var(--ink-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .tool-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        .tool-features li {
+            font-size: 13px;
+            color: var(--ink-soft);
+            padding: 6px 0 6px 22px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .tool-features li::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 12px;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .tool-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink);
+            transition: gap 0.2s ease;
+        }
+        .tool-cta:hover { gap: 10px; }
+        .tool-cta svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+        .tool-cta.disabled {
+            color: var(--ink-light);
+            cursor: not-allowed;
+        }
+
+        /* Roadmap */
+        .roadmap-section {
+            background: var(--bg-paper);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .roadmap {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .roadmap-item {
+            display: flex;
+            gap: 20px;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .roadmap-item:last-child { border-bottom: none; }
+        .roadmap-quarter {
+            flex-shrink: 0;
+            width: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-hover);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding-top: 4px;
+        }
+        .roadmap-content {
+            flex: 1;
+        }
+        .roadmap-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .roadmap-status {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .roadmap-status.done {
+            background: rgba(45, 134, 89, 0.1);
+            color: var(--success);
+        }
+        .roadmap-status.progress {
+            background: var(--accent-soft);
+            color: var(--accent-hover);
+        }
+        .roadmap-status.planned {
+            background: var(--bg-subtle);
+            color: var(--ink-muted);
+        }
+        .roadmap-description {
+            font-size: 14px;
+            color: var(--ink-muted);
+            line-height: 1.55;
+        }
+
+        /* About */
+        .about {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .about p {
+            font-size: 17px;
+            color: var(--ink-soft);
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+        .about p:last-child { margin-bottom: 0; }
+        .about-highlight {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        /* Why */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .why-card {
+            text-align: center;
+            padding: 24px;
+        }
+        .why-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-soft);
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--accent-hover);
+        }
+        .why-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .why-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 10px;
+            letter-spacing: -0.015em;
+        }
+        .why-description {
+            font-size: 14px;
+            color: var(--ink-muted);
+            line-height: 1.55;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--ink);
+            color: var(--bg-paper);
+            margin: 80px 0 0;
+            padding: 80px 32px;
+            text-align: center;
+        }
+        .cta-section .section-title {
+            color: var(--bg-paper);
+        }
+        .cta-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .cta-section .btn-primary {
+            background: var(--bg-paper);
+            color: var(--ink);
+            margin-top: 32px;
+        }
+        .cta-section .btn-primary:hover {
+            background: var(--bg);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg);
+            padding: 56px 32px 32px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--ink-muted);
+            margin-top: 16px;
+            line-height: 1.5;
+            max-width: 320px;
+        }
+        .footer-col-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            list-style: none;
+        }
+        .footer-links a {
+            font-size: 14px;
+            color: var(--ink-muted);
+            transition: color 0.15s ease;
+        }
+        .footer-links a:hover {
+            color: var(--ink);
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--ink-muted);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+        .footer-social a {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--bg-subtle);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-muted);
+            transition: all 0.15s ease;
+        }
+        .footer-social a:hover {
+            background: var(--ink);
+            color: var(--bg-paper);
+        }
+        .footer-social svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        @media (max-width: 900px) {
+            .nav-inner { padding: 14px 20px; }
+            .nav-links { gap: 18px; }
+            .nav-status { display: none; }
+            .hero { padding: 64px 20px 56px; }
+            .stats { grid-template-columns: repeat(2, 1fr); padding: 0 20px 56px; }
+            .section { padding: 56px 20px; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; gap: 16px; }
+            .roadmap-item { flex-direction: column; gap: 8px; }
+            .roadmap-quarter { width: auto; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .cta-section { padding: 56px 20px; margin-top: 56px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="logo">
+                <div class="logo-mark">
+                    <svg viewBox="0 0 16 16"><path d="M3 3l5 3 5-3v5l-5 3-5-3v-5z M3 8v5l5 3 5-3v-5"/></svg>
+                </div>
+                EduGen Suite
+            </a>
+            <div class="nav-links">
+                <a href="#tools">Tools</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#about">About</a>
+                <span class="nav-status">
+                    <span class="status-dot"></span>
+                    All systems operational
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-eyebrow">
+            <span class="hero-eyebrow-dot"></span>
+            Built for Indian educators
+        </div>
+        <h1 class="hero-title">
+            AI tools that give teachers<br>
+            <span class="hero-title-accent">their time back.</span>
+        </h1>
+        <p class="hero-subtitle">
+            A growing suite of free AI-powered tools designed to handle the tedious parts of teaching — so you can focus on what matters most.
+        </p>
+        <div class="hero-actions">
+            <a href="#tools" class="btn-primary">
+                Explore the tools
+                <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            <a href="#about" class="btn-secondary">
+                Read the story
+            </a>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+        <div>
+            <div class="stat-number">2</div>
+            <div class="stat-label">Live tools</div>
+        </div>
+        <div>
+            <div class="stat-number">14</div>
+            <div class="stat-label">Languages supported</div>
+        </div>
+        <div>
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Free to use</div>
+        </div>
+        <div>
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Lessons generated</div>
+        </div>
+    </section>
+
+    <!-- LIVE TOOLS -->
+    <section class="section" id="tools">
+        <div class="section-header">
+            <div class="section-eyebrow">Live now</div>
+            <h2 class="section-title">Tools you can use today</h2>
+            <p class="section-subtitle">
+                Both tools are live, free, and built specifically for CBSE and ICSE curricula. No signup required.
+            </p>
+        </div>
+
+        <div class="tools-grid">
+            <!-- QuizGen -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-icon" style="background: var(--quiz-color);">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    </div>
+                    <span class="tool-badge live">● Live</span>
+                </div>
+                <h3 class="tool-name">QuizGen</h3>
+                <p class="tool-tagline">Generate calibrated assessments from any chapter or PDF in seconds.</p>
+                <ul class="tool-features">
+                    <li>4 question types: MCQ, SCQ, True/False, Subjective</li>
+                    <li>Bloom's Taxonomy aligned across 6 cognitive levels</li>
+                    <li>NCERT chapter database for Classes 6–12</li>
+                    <li>Upload PDFs of any size (browser-side extraction)</li>
+                    <li>Export to CSV, Excel, Word, JSON, or print</li>
+                </ul>
+                <a href="https://quiz-generator-irvs.vercel.app" target="_blank" class="tool-cta">
+                    Open QuizGen
+                    <svg viewBox="0 0 16 16"><path d="M5 3h8v8 M13 3l-10 10"/></svg>
+                </a>
+            </div>
+
+            <!-- LessonGen -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-icon" style="background: var(--lesson-color);">
+                        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                    </div>
+                    <span class="tool-badge live">● Live</span>
+                </div>
+                <h3 class="tool-name">LessonGen</h3>
+                <p class="tool-tagline">Professional 40-minute CBSE 5E model lesson plans, ready to teach.</p>
+                <ul class="tool-features">
+                    <li>Engage → Explore → Explain → Elaborate → Evaluate</li>
+                    <li>Sample teacher dialogue for every phase</li>
+                    <li>Differentiation strategies for diverse learners</li>
+                    <li>14 languages including Hindi, Marathi, Hinglish</li>
+                    <li>Auto-generate next chapter in syllabus</li>
+                </ul>
+                <a href="https://lessongen.vercel.app" target="_blank" class="tool-cta">
+                    Open LessonGen
+                    <svg viewBox="0 0 16 16"><path d="M5 3h8v8 M13 3l-10 10"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMING SOON -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-eyebrow">In development</div>
+            <h2 class="section-title">Coming next</h2>
+            <p class="section-subtitle">
+                Tools being built based on real teacher feedback. Want to suggest one? Reach out below.
+            </p>
+        </div>
+
+        <div class="tools-grid">
+            <!-- PaperGen -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-icon" style="background: var(--paper-color);">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+                    </div>
+                    <span class="tool-badge soon">Coming Soon</span>
+                </div>
+                <h3 class="tool-name">PaperGen</h3>
+                <p class="tool-tagline">Generate formal exam papers with proper marks distribution and answer keys.</p>
+                <ul class="tool-features">
+                    <li>Section-wise format (1, 2, 5 mark questions)</li>
+                    <li>Auto-balanced marks distribution</li>
+                    <li>School header customization</li>
+                    <li>Separate answer key PDF</li>
+                </ul>
+                <span class="tool-cta disabled">
+                    Building this now
+                </span>
+            </div>
+
+            <!-- WorksheetGen -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-icon" style="background: var(--worksheet-color);">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+                    </div>
+                    <span class="tool-badge soon">Coming Soon</span>
+                </div>
+                <h3 class="tool-name">WorksheetGen</h3>
+                <p class="tool-tagline">Print-ready worksheets for primary classes with exercises and activities.</p>
+                <ul class="tool-features">
+                    <li>Class 1–5 focused</li>
+                    <li>Math, English, EVS exercises</li>
+                    <li>Fill-in-the-blanks, matching, coloring</li>
+                    <li>Beautiful print-ready PDFs</li>
+                </ul>
+                <span class="tool-cta disabled">
+                    On the roadmap
+                </span>
+            </div>
+
+            <!-- DoubtBot -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-icon" style="background: var(--doubt-color);">
+                        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><circle cx="9" cy="10" r="0.5"/><circle cx="12" cy="10" r="0.5"/><circle cx="15" cy="10" r="0.5"/></svg>
+                    </div>
+                    <span class="tool-badge soon">Coming Soon</span>
+                </div>
+                <h3 class="tool-name">DoubtBot</h3>
+                <p class="tool-tagline">An AI tutor that helps students understand concepts in their own language.</p>
+                <ul class="tool-features">
+                    <li>Step-by-step explanations</li>
+                    <li>Indian curriculum aware</li>
+                    <li>Multilingual (Hindi, English, regional)</li>
+                    <li>Free for students</li>
+                </ul>
+                <span class="tool-cta disabled">
+                    On the roadmap
+                </span>
+            </div>
+
+            <!-- NotesGen -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-icon" style="background: var(--notes-color);">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 14l2 2 4-4"/></svg>
+                    </div>
+                    <span class="tool-badge soon">Coming Soon</span>
+                </div>
+                <h3 class="tool-name">NotesGen</h3>
+                <p class="tool-tagline">Convert any chapter PDF into clean, organized study notes for students.</p>
+                <ul class="tool-features">
+                    <li>Key concepts extraction</li>
+                    <li>Important definitions highlighted</li>
+                    <li>Quick revision summaries</li>
+                    <li>Mind maps for complex topics</li>
+                </ul>
+                <span class="tool-cta disabled">
+                    On the roadmap
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-eyebrow">The principles</div>
+            <h2 class="section-title">Why EduGen exists</h2>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 class="why-title">Time, given back</h3>
+                <p class="why-description">
+                    Indian teachers spend 8–10 hours a week on prep work alone. AI can handle most of that. EduGen tools target the most time-consuming, least-creative parts of teaching.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3 class="why-title">Curriculum-aware</h3>
+                <p class="why-description">
+                    Built around CBSE and ICSE syllabi, not generic templates. Real chapter names, real Bloom's alignment, real classroom context.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+                </div>
+                <h3 class="why-title">Free, by design</h3>
+                <p class="why-description">
+                    Quality teaching tools should not be a luxury. Every tool here is free, with no signup, no ads, and no upsells. If costs ever rise, the model will adapt — but free will stay an option.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="roadmap-section">
+        <div class="section">
+            <div class="section-header">
+                <div class="section-eyebrow">What's next</div>
+                <h2 class="section-title">Roadmap</h2>
+                <p class="section-subtitle">
+                    An honest view of what's done, what's being built, and what's planned.
+                </p>
+            </div>
+
+            <div class="roadmap">
+                <div class="roadmap-item">
+                    <div class="roadmap-quarter">Q1 2026</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">
+                            QuizGen v1
+                            <span class="roadmap-status done">Shipped</span>
+                        </div>
+                        <p class="roadmap-description">
+                            First version live with PDF support, multiple question types, Bloom's alignment, and 14-language output. Used by teachers across India.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-quarter">Q2 2026</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">
+                            LessonGen v1
+                            <span class="roadmap-status done">Shipped</span>
+                        </div>
+                        <p class="roadmap-description">
+                            CBSE 5E lesson plan generator with auto-progression to the next chapter, multilingual output, and Hinglish support for natural classroom language.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-quarter">Q3 2026</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">
+                            PaperGen
+                            <span class="roadmap-status progress">Building</span>
+                        </div>
+                        <p class="roadmap-description">
+                            Formal exam paper generator following standard board patterns. Auto-balanced marks distribution, school header customization, separate answer key.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-quarter">Q4 2026</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">
+                            WorksheetGen + NotesGen
+                            <span class="roadmap-status planned">Planned</span>
+                        </div>
+                        <p class="roadmap-description">
+                            Print-ready primary class worksheets with exercises and activities. Plus, a study notes generator for students that converts chapter PDFs into clean revision material.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-quarter">2027</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">
+                            DoubtBot + EduGen Cloud
+                            <span class="roadmap-status planned">Planned</span>
+                        </div>
+                        <p class="roadmap-description">
+                            Student-facing AI tutor in multiple Indian languages. Teacher accounts to save and organize generated content. Optional school accounts for shared access.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <div class="section-eyebrow">The story</div>
+            <h2 class="section-title">A simple idea, built honestly</h2>
+        </div>
+
+        <div class="about">
+            <p>
+                <span class="about-highlight">EduGen Suite started as a single question:</span> if AI can write code and answer emails, why are teachers still spending Sunday evenings making quizzes by hand?
+            </p>
+            <p>
+                These tools are built one at a time, in public, by someone who cares about Indian classrooms — not by a corporation looking for a captive market. Every feature exists because a teacher (or a teacher-to-be) needed it.
+            </p>
+            <p>
+                The bigger vision is to build a complete suite of free tools that meaningfully reduce the load on educators across India — and someday, to use what's learned here to support new models of affordable, high-quality schooling.
+            </p>
+            <p>
+                Built from <span class="about-highlight">Pune, India 🇮🇳</span> with a lot of iteration and a little stubbornness.
+            </p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="section-eyebrow" style="color: var(--accent);">Ready when you are</div>
+        <h2 class="section-title">Try the tools. They're free.</h2>
+        <p class="section-subtitle">No signup. No credit card. Just open and use.</p>
+        <a href="#tools" class="btn-primary">
+            See the tools
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 16 16"><path d="M3 3l5 3 5-3v5l-5 3-5-3v-5z M3 8v5l5 3 5-3v-5"/></svg>
+                        </div>
+                        EduGen Suite
+                    </a>
+                    <p>Free AI tools designed for Indian educators. Built with care from Pune.</p>
+                </div>
+                <div>
+                    <div class="footer-col-title">Tools</div>
+                    <ul class="footer-links">
+                        <li><a href="https://quiz-generator-irvs.vercel.app" target="_blank">QuizGen</a></li>
+                        <li><a href="https://lessongen.vercel.app" target="_blank">LessonGen</a></li>
+                        <li><a href="#tools">PaperGen (soon)</a></li>
+                        <li><a href="#tools">WorksheetGen (soon)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Suite</div>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        <li><a href="https://github.com/Priyanka3025" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Connect</div>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/Priyanka3025" target="_blank">GitHub</a></li>
+                        <li><a href="mailto:hello@example.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2026 EduGen Suite · Built in Pune, India 🇮🇳</div>
+                <div class="footer-social">
+                    <a href="https://github.com/Priyanka3025" target="_blank" aria-label="GitHub">
+                        <svg viewBox="0 0 16 16" fill="currentColor" stroke="none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
